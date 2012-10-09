@@ -1,5 +1,6 @@
 (function($) {
 
+  // On DOM ready
   $(function() {
     
     // Initialize FastClick from FT Labs:
@@ -7,24 +8,24 @@
     // click event on mobile browsers
     new FastClick(document.body);
 
-    // Add toggle to show/hide card back when card is clicked
-    $('.cards li').toggle(
-      function () {
-        $(this).addClass('card-hover');
-      },
-      function () {
-        $(this).removeClass('card-hover');
+    // Add toggle to show/hide card back when card is clicked or hovered
+    $('.cards li').click(function (e) {
+      console.log('click');
+      // Don't hide card back if user clicked on a link
+      if (e.target.nodeName !== 'A') {
+        $(this).toggleClass('card-hover');
       }
-    );
+    });
 
-    $('.cards li').hover(
-      function () {
-        $(this).addClass('card-hover');
-      },
-      function () {
-        $(this).removeClass('card-hover');
-      }
-    );
+    $('.cards li').mouseenter(function () {
+      console.log('mouseenter');
+      $(this).addClass('card-hover');
+    });
+
+    $('.cards li').mouseleave(function () {
+      console.log('mouseleave');
+      $(this).removeClass('card-hover');
+    });
 
     // Choose between standard images or retina images, depending on device
     picturefill();

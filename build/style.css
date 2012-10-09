@@ -1,4 +1,4 @@
-/*! nicolashery.com | 2012-10-08 */
+/*! nicolashery.com | 2012-10-09 */
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -180,12 +180,6 @@ strong {
   max-width: 100%;
 }
 
-.card-hover {
-  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
-  -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
-}
-
 .card-back {
   visibility: hidden;
   position: absolute;
@@ -198,6 +192,12 @@ strong {
 
 .card-hover .card-back {
   visibility: visible;
+}
+
+.card-hover {
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 1159px) {

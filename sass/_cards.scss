@@ -55,10 +55,6 @@
   max-width: 100%;
 }
 
-.card-hover {
-  @include box-shadow($cardBoxShadowHover);
-}
-
 // Card back on hover or click
 // ------------------------------------
 .card-back {
@@ -73,6 +69,10 @@
 
 .card-hover .card-back {
   visibility: visible;
+}
+
+.card-hover {
+  @include box-shadow($cardBoxShadowHover);
 }
 
 // Responsive
