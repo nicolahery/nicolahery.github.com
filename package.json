@@ -1,0 +1,14 @@
+{
+  "name": "nicolahery.github.com",
+  "version": "0.1.0",
+  "description": "My personal web page",
+  "homepage": "https://github.com/nicolahery/nicolahery.github.com",
+  "author": "Nicolas Hery <nicolahery@gmail.com>",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-jade": "*",
+    "grunt-compass": "*",
+    "grunt-css": "*"
+  }
+}

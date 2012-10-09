@@ -1,0 +1,159 @@
+@import "base";
+@import "scaffolding";
+@import "typography";
+@import "cards";
+
+body {
+  padding-top: 40px;
+
+  // Custom font
+  font-family: 'Source Sans Pro', sans-serif;
+
+  // Pattern
+  background-image: url(../img/bgnoise.png);
+  background-color: #F7F7F7;
+}
+
+// Typography
+// ------------------------------------
+p {
+  // For paragraphs, make text bigger on large screens
+  font-size: $baseFontSize * 1.25;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  // Adjust font size at first breakpoint
+  $maxScreenWidth: cardBoxWidth($cardRowCount, $addSidebar: true, $addContainerPadding: true);
+  @media (max-width: $maxScreenWidth - 1) {
+    font-size: $baseFontSize;
+  }
+}
+
+p.last {
+  margin-bottom: 40px;
+}
+
+// Headers
+// ------------------------------------
+h1 {
+  margin: 0;
+  color: $primaryColor;
+}
+
+h2 {
+  margin: 10px 0 30px 0;
+}
+
+.subheader {
+  font-weight: normal;
+  font-size: $baseFontSize * 1.5;
+  color: $grayLighter;
+}
+
+// Profile picture
+// ------------------------------------
+.profile-picture {
+  width: $profilePictureSize;
+  height: $profilePictureSize;
+  margin-bottom: 20px;
+
+  img {
+    width: $profilePictureSize;
+    height: $profilePictureSize;
+    border-radius: $profilePictureSize/2;
+  }
+
+  // When side bar collapses, center image
+  $maxScreenWidth: cardBoxWidth($sidebarSinkPoint + 1, $addSidebar: true, $addContainerPadding: true);
+  @media (max-width: $maxScreenWidth - 1) {
+    width: $profilePictureSize;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Social links
+// ------------------------------------
+ul.social-links {
+  font-size: 14px;
+  margin-bottom: 20px;
+  @include clearfix();
+
+  li {
+    margin-bottom: 5px;
+  }
+}
+
+// When side bar collapses, center social links
+@media (max-width: cardBoxWidth($sidebarSinkPoint + 1, $addSidebar: true, $addContainerPadding: true) - 1) {
+  #sidebar {
+    text-align: center;
+  }
+
+  ul.social-links {
+    display: inline-block;
+
+    li {
+      float: left;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}
+
+// Cards
+// ------------------------------------
+$cardImageBottomBorderSize: 5px;
+
+.card-image {
+  height: round($cardHeight/3*2);
+  border-radius: $cardBorderRadius $cardBorderRadius 0 0;
+  overflow: hidden;
+  border-bottom: $cardImageBottomBorderSize solid $primaryColor;
+  
+  img {
+    width: $cardWidth;
+    height: round($cardHeight/3*2) - $cardImageBottomBorderSize;
+    border-radius: $cardBorderRadius $cardBorderRadius 0 0;
+    overflow: hidden;
+  }
+}
+
+$cardTitleFontSize: 24px;
+
+.card-title {
+  text-align: center;
+  font-size: $cardTitleFontSize;
+  font-weight: bold;
+  color: #777;
+  margin: round(($cardHeight/3 - $cardTitleFontSize)/2) 0;
+}
+
+$cardBackFontSize: 14px;
+$cardBackLineHeight: 19px;
+
+.card-back p {
+  font-size: $cardBackFontSize;
+  line-height: $cardBackLineHeight;
+  margin-bottom: $verticalSpacingSmall;
+}
+
+// Fixed heights so tech stack and link always at bottom
+p.card-description {
+  height: $cardHeight - 2*10px - 2*$cardBackLineHeight - 3*$verticalSpacingSmall; 
+}
+
+p.card-tech-stack {
+  font-weight: bold;
+  height: $cardBackLineHeight;
+}
+
+p.card-link {
+  height: $cardBackLineHeight;
+}
+
+p.card-description, p.card-tech-stack, p.card-link {
+  // Screen smaller than size of 1 card: release height
+  @media (max-width: cardBoxWidth(1, $addContainerPadding: true) - 1) {
+    height: auto;
+  }
+}

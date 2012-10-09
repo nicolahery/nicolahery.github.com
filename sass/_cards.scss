@@ -1,0 +1,153 @@
+// Container, sidebar, main, cards
+@import "base";
+
+// Basic layout
+// ------------------------------------
+.container {
+  margin: auto;
+  padding: 0 $containerPadding;
+  width: cardBoxWidth($cardRowCount, $addSidebar: true, $addContainerPadding: true);
+  @include clearfix();
+  overflow: hidden; // For the card list's negative side margins
+}
+
+#sidebar, #main {
+  float: left;
+}
+
+#sidebar {
+  margin-right: $sidebarRightMargin;
+  margin-left: $sidebarLeftMargin;
+  width: $sidebarWidth;
+}
+
+#main {
+  width: cardBoxWidth($cardRowCount);
+}
+
+// Cards
+// ------------------------------------
+.cards {
+  margin: 0 (-$cardColSpace/2); // Make up for external cards' margins
+  @include clearfix();
+}
+
+.cards li {
+  float: left;
+  margin: 0 ($cardColSpace/2) $cardRowSpace ($cardColSpace/2);
+}
+
+.card, .card-back {
+  width: $cardWidth;
+  @include border-radius($cardBorderRadius);
+  overflow: hidden;
+}
+
+.card {
+  height: $cardHeight;
+  padding: $cardPadding;
+  background: $cardBackground;
+  @include box-shadow($cardBoxShadow);
+  position: relative;
+}
+
+.card img {
+  max-width: 100%;
+}
+
+.card-hover {
+  @include box-shadow($cardBoxShadowHover);
+}
+
+// Card back on hover or click
+// ------------------------------------
+.card-back {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%; // This is a child element of .card, make same height
+  padding: $cardBackPadding;
+  background: $cardBackBackground;
+}
+
+.card-hover .card-back {
+  visibility: visible;
+}
+
+// Responsive
+// ------------------------------------
+@for $i from 1 through $cardRowCount - 1 {
+  $nCards: $cardRowCount - $i; // From biggest screen to smallest
+  @if $sidebarOn and $nCards > $sidebarSinkPoint {
+    // Breakpoint: Keep sidebar, remove one card per row
+    $maxScreenWidth: cardBoxWidth($nCards + 1, $addSidebar: true, $addContainerPadding: true);
+    @media (max-width: $maxScreenWidth - 1) {
+      .container {
+        width: cardBoxWidth($nCards, $addSidebar: true, $addContainerPadding: true);
+      }
+      #main {
+        width: cardBoxWidth($nCards);
+      }
+    }
+  } @else if $sidebarOn and $nCards == $sidebarSinkPoint {
+    // Breakpoint: Remove sidebar, keep same number of cards per row
+    $maxScreenWidth: cardBoxWidth($nCards + 1, $addSidebar: true, $addContainerPadding: true);
+    @media (max-width: $maxScreenWidth - 1) {
+
+      #sidebar, #main {
+        float: none;
+      }
+      #sidebar {
+        margin-right: 0;
+        margin-left: 0;
+      }
+      .container {
+        width: cardBoxWidth($nCards + 1, $addContainerPadding: true);
+      }
+      #sidebar, #main {
+        width: cardBoxWidth($nCards + 1);
+      }
+    }
+    // Extra breakpoint: Remove one card per row (after removing sidebar)
+    $maxScreenWidth: cardBoxWidth($nCards + 1, $addContainerPadding: true);
+    @media (max-width: $maxScreenWidth - 1) {
+      .container {
+        width: cardBoxWidth($nCards, $addContainerPadding: true);
+      }
+      #sidebar, #main {
+        width: cardBoxWidth($nCards);
+      }
+    }
+  } @else {
+    // Breakpoint: Remove one card per row
+    $maxScreenWidth: cardBoxWidth($nCards + 1, $addContainerPadding: true);
+    @media (max-width: $maxScreenWidth - 1) {
+      .container {
+        width: cardBoxWidth($nCards, $addContainerPadding: true);
+      }
+      #sidebar, #main {
+        width: cardBoxWidth($nCards);
+      }
+    }
+  }
+}
+
+// Screen smaller than size of 1 card: switch to fluid, 100% width;
+@media (max-width: cardBoxWidth(1, $addContainerPadding: true) - 1) {
+  .container, #sidebar, #main, .card, .card-back {
+    width: 100%;
+  }
+  .cards {
+    margin-left: 0; // Remove negative margins
+    margin-right: 0;
+  }
+  .cards li {
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .card {
+    height: auto; // Remove fixed height
+  }
+}

@@ -1,0 +1,280 @@
+mixin retinaImage(stub, title)
+  | <div data-picture data-alt="#{title}">
+  |   <div data-src="img/#{stub}.jpg"></div>
+  |   <div data-src="img/#{stub}_x2.jpg" data-media="(min-resolution: 192dpi),(-webkit-min-device-pixel-ratio: 2),(min--moz-device-pixel-ratio: 2),(-o-min-device-pixel-ratio: 2/1),(min-device-pixel-ratio: 2),(min-resolution: 2dppx)"></div>
+  | </div>
+  | <noscript>
+  |   <img src="img/#{stub}.jpg" alt="#{title}"/>
+  | </noscript>
+
+mixin retinaImageLazy(stub, title)
+  | <div data-picture data-alt="#{title}">
+  |   <div data-src-lazy="img/#{stub}.jpg" data-src="img/loading.png"></div>
+  |   <div data-src-lazy="img/#{stub}_x2.jpg" data-src="img/loading.png" data-media="(min-resolution: 192dpi),(-webkit-min-device-pixel-ratio: 2),(min--moz-device-pixel-ratio: 2),(-o-min-device-pixel-ratio: 2/1),(min-device-pixel-ratio: 2),(min-resolution: 2dppx)"></div>
+  | </div>
+  | <noscript>
+  |   <img src="img/#{stub}.jpg" alt="#{title}"/>
+  | </noscript>
+
+!!! 5
+html
+
+  head
+    title Nicolas Hery
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', rel='stylesheet', type='text/css')
+    if env == 'production'
+      link(rel='stylesheet', href='build/style.min.css')
+    else
+      link(rel='stylesheet', href='css/style.css')
+    if env == 'production'
+      | <script type="text/javascript">
+      | 
+      |   var _gaq = _gaq || [];
+      |   _gaq.push(['_setAccount', 'UA-35416477-1']);
+      |   _gaq.push(['_trackPageview']);
+      | 
+      |   (function() {
+      |     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      |     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      |     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      |   })();
+
+      | </script>
+  
+  body
+    .container
+      #sidebar
+        .profile-picture
+          mixin retinaImage('profile-picture-nicolas-hery', 'Profile Picture')
+        ul.social-links
+          li
+            a(href='https://twitter.com/nicolahery') Twitter
+          li
+            a(href='https://github.com/nicolahery') GitHub
+          li 
+            a(href='http://www.linkedin.com/in/nicolashery') LinkedIn
+
+      #main
+        h1 Nicolas Hery
+        h2.subheader Web development. Data analytics.
+        p I'm a self-taught web developer with a background in applied mathematics. I like to build things, especially if those things make a difference in people's lives. I constantly try to learn more about design, user experience, data visualization, new technologies and use them in my projects. Originally from France, I now live and work in New York.
+        p.last (Touch screens: tap to see the back of a card!)
+
+        h2 Recent projects
+        ol.cards
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('n', 'N')
+              .card-title "N"
+              .card-back
+                p.card-description "N" (still working on the name!) is my current side project. It has to do with healthcare and data analysis. I'm very excited about this one!
+                p.card-tech-stack Backbone, Python, MySQL
+                p.card-link Check back soon for the link!
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('outfolio', 'Outfolio')
+              .card-title Outfolio
+              .card-back
+                p.card-description Outfolio is a simple app that I built to help me remember the restaurant and bars I love going to in different cities.
+                p.card-tech-stack Backbone, Node.js, MongoDB
+                p.card-link
+                  a(href='http://outfol.io') outfol.io
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('excesiv', 'Excesiv')
+              .card-title Excesiv
+              .card-back
+                p.card-description Excesiv is a small application component that I used in a bigger project to generate Excel sheets from templates on the server.
+                p.card-tech-stack Python, JRuby, Apache POI, MongoDB
+                p.card-link
+                  a(href='https://github.com/nicolahery/excesiv') github.com/nicolahery
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('wotr', 'Welcome On The Road')
+              .card-title Welcome On The Road
+              .card-back
+                p.card-description Welcome On The Road is a WordPress site I set up and customized the theme for two young French ladies writing about interesting places they discovered around the world.
+                p.card-tech-stack WordPress
+                p.card-link
+                  a(href='http://welcomeontheroad.com') welcomeontheroad.com 
+                  | (FR)
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('nicolashery-com', 'nicolashery.com')
+              .card-title nicolashery.com
+              .card-back
+                p.card-description I build my personal web page from scratch and made sure it was responsive and looked nice on any device.
+                p.card-tech-stack Jade, Sass
+                p.card-link
+                  a(href='https://github.com/nicolahery/nicolahery.github.com') nicolahery.github.com
+
+        h2 Skills and tools
+        ol.cards
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('javascript', 'JavaScript')
+              .card-title JavaScript
+              .card-back
+                p.card-description JavaScript is my latest discovery in programming languages. I now spend most of my time building web apps, and I use it with Node.js for the back end too. I love writing in CoffeeScript.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://coffeescript.org') coffeescript.org
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('python', 'Python')
+              .card-title Python
+              .card-back
+                p.card-description I call Python my "swiss army knife". I use it for many things, from parsing a text file, to transforming and loading data in a database, and of course for its powerul scientific computing libraries.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://python.org') python.org
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('backbone', 'Backbone.js')
+              .card-title Backbone.js
+              .card-back
+                p.card-description Backbone.js is my preferred library to build JavaScript web applications, both powerful and flexible.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://documentcloud.github.com/backbone') documentcloud.github.com/backbone
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('node', 'Node.js')
+              .card-title Node.js
+              .card-back
+                p.card-description I've been reading about Node.js from its very beginning and was seduced by its speed and async nature. Since I "skipped" Ruby on Rails, with Node I feel like I'm part of what I think is the next big thing.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://nodejs.org') nodejs.org
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('sass', 'Sass')
+              .card-title Sass
+              .card-back
+                p.card-description Using Sass helps me write more organized and maintainable CSS. I ended up choosing it over LESS because the community seems more active.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://sass-lang.com') sass-lang.com
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('pandas', 'Pandas')
+              .card-title Pandas
+              .card-back
+                p.card-description Pandas is a powerful Python library for data analysis, and a nice addition to NumPy. I've been using it from its very beginning, and it has come a long way.
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://pandas.pydata.org') pandas.pydata.org
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('mongodb', 'MongoDB')
+              .card-title MongoDB
+              .card-back
+                p.card-description I used MongoDB on a couple of projects, and I love the simplicity and freedom NoSQL databases give you. You can even used MongoDB as a message queue, and as a file system!
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://www.mongodb.org') www.mongodb.org
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('heroku', 'Heroku')
+              .card-title Heroku
+              .card-back
+                p.card-description Once you go Platform-as-a-Service (PaaS), you can't go back! After starting using Heroku, any SysAdmin work I do feels frustrating. Too bad its a little expensive when you scale!
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://www.heroku.com') www.heroku.com
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('trello', 'Trello')
+              .card-title Trello
+              .card-back
+                p.card-description Trello is just an awesome app to organize anything: projects, to-dos, etc. Also, the tech stack and the way the app is built is, for me, a model of snapiness and great user experience.
+                p.card-tech-stack
+                p.card-link
+                  a(href='https://trello.com') trello.com
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('sublimetext', 'Sublime Text 2')
+              .card-title Sublime Text 2
+              .card-back
+                p.card-description I tried countless text editors, and like many people out there I ended up falling in love with Sublime Text 2. It's beautiful, and it's fast. Since we spend so much time in it, might as well select the best!
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://www.sublimetext.com') www.sublimetext.com
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('photoshop', 'Photoshop')
+              .card-title Photoshop
+              .card-back
+                p.card-description I love graphic design, and not so much anymore but I used to spend hours in Photoshop coloring my scanned sketches or mocking up interfaces. It's still there whenever I need it!
+                p.card-tech-stack
+                p.card-link
+                  a(href='http://www.photoshop.com') www.photoshop.com
+
+        h2 More about me
+        ol.cards
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('a-good-chat', 'A Good Chat')
+              .card-title A Good Chat
+              .card-back
+                p.card-description There's nothing like a nice long chat over a fresh beer (maybe a couple), talking shop, programming, business, travel, cats, anything really. If you're in town and interested, be sure to holler!
+                p.card-tech-stack
+                p.card-link
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('hats', 'Hats')
+              .card-title Hats
+              .card-back
+                p.card-description Don't ask me why but I like hats. Hats are awesome. I have a running collection and I regularly lose them.
+                p.card-tech-stack
+                p.card-link
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('guitar', 'Guitar')
+              .card-title Guitar
+              .card-back
+                p.card-description Ok, if coding doesn't work out, I'll never be the lead guitarist of a rock band, but I try! I also love live music, and if there's some great guitar playing that's even better!
+                p.card-tech-stack
+                p.card-link
+          li
+            .card
+              .card-image
+                mixin retinaImageLazy('travel', 'Travel')
+              .card-title Travel
+              .card-back
+                p.card-description I was lucky enough when I was a kid to live in all these different places: France, US, Singapore. I kind of got the taste for travel afterwards, and love visiting new countries and meeting the people there.
+                p.card-tech-stack
+                p.card-link
+
+        h2 Contact
+        p.last I'm <strong>nicolahery</strong> on Twitter, GitHub, and Gmail. Give me a shout!
+
+    if env == 'production'
+      script(src='build/app.min.js')
+    else 
+      script(src='js/vendor/jquery.js')
+      script(src='js/vendor/fastclick.js')
+      script(src='js/vendor/picturefill.js')
+      script(src='js/vendor/jail.js')
+      script(src='js/app.js')
